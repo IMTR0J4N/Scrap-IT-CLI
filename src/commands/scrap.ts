@@ -46,6 +46,10 @@ export default class Scrap extends Command {
         const page = await browser.newPage()
         
         break;
+      case 'png':
+        break;
+      case 'pdf':
+        break;
     }
   }
 }
