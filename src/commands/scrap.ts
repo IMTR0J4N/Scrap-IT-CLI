@@ -1,5 +1,6 @@
-import { Command, Flags, ux } from '@oclif/core'
+import { Command, Flags, ux } from '@oclif/core';
 import * as inquirer from 'inquirer';
+import puppeteer from 'puppeteer';
 
 export default class Scrap extends Command {
   static description = 'describe the command here'
@@ -25,7 +26,7 @@ export default class Scrap extends Command {
       }])
 
       await this.isUrl(response.url)
-      
+
       url = response.url
     }
     ux.log(`The stage is: ${url}`)
@@ -34,5 +35,17 @@ export default class Scrap extends Command {
   private async isUrl(url: string): Promise<boolean> {
     const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
     return urlRegex.test(url);
+  }
+
+  private async genPage(opt: String) {
+    switch (opt) {
+      case 'html':
+
+        const browser = await puppeteer.launch();
+
+        const page = await browser.newPage()
+        
+        break;
+    }
   }
 }
