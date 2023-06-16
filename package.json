@@ -1,15 +1,15 @@
 {
-  "name": "scrape-it-cli",
+  "name": "scrap-it-cli",
   "version": "0.0.0",
   "description": "Advanced scraping CLI",
   "author": "IMTR0J4NV2",
   "bin": {
     "scrapeit": "./bin/run"
   },
-  "homepage": "https://github.com/IMTR0J4NV2/scrape-it-CLI",
+  "homepage": "https://github.com/IMTR0J4NV2/Scrap-IT-CLI",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "IMTR0J4NV2/scrape-it-CLI",
+  "repository": "IMTR0J4NV2/Scrap-IT-CLI",
   "files": [
     "/bin",
     "/dist",
