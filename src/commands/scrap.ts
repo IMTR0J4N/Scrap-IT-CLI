@@ -2,9 +2,12 @@ import { Command, Flags, ux } from '@oclif/core';
 import * as inquirer from 'inquirer';
 
 import * as fs from 'fs';
+import PuppeteerService from '../services/PuppeteerService';
 
-const shell = new ActiveXObject('WScript.Shell');
-const pathToMyDocuments = shell.SpecialFolders('MyDocuments');
+import { ScrapFiles } from "../interfaces"
+
+// const shell = new ActiveXObject('WScript.Shell');
+// const pathToMyDocuments = shell.SpecialFolders('MyDocuments');
 
 export default class Scrap extends Command {
   static description = 'describe the command here'
@@ -28,14 +31,14 @@ export default class Scrap extends Command {
         message: 'Which URL you want Scrap-IT to scrap ?',
         type: 'input',
         default: ' https://example.com'
-      }]).then(async () => {
-        if (await this.isUrl(urlResponse.url) === false) {
+      }]).then(async (data) => {
+        if (await this.isUrl(data.url) === false) {
           ux.error('Given URL is invalid')
         } else {
-          url = urlResponse.url
+          url = data.url
         }
       }).then(() => {
-        const 
+        new PuppeteerService().scrap("html", { includeScript: true, includeStyle: true })
       })
     }
   }
