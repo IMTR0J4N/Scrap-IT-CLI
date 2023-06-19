@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Advanced scraping CLI",
   "author": "IMTR0J4NV2",
+  "type": "commonjs",
   "bin": {
     "scrapeit": "./bin/run"
   },

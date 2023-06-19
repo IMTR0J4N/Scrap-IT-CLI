@@ -39,7 +39,7 @@ export default class PuppeteerService {
 
                 }
 
-                
+
 
                 await FileService.writeDataInFile(`${savePath}/Scrap-IT/${folder}/index.html`, prettify(await page.evaluate(() => document.documentElement.outerHTML)))
             })
