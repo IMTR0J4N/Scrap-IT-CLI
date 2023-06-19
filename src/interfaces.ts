@@ -1,4 +1,4 @@
-interface HTMLScrapOpt {
-    includeJs: boolean,
-    includeCss: boolean,
+interface ScrapOpts {
+    includeScript: boolean,
+    includeStyle: boolean
 }
