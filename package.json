@@ -20,6 +20,7 @@
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.4.7",
+    "html-prettify": "^1.0.7",
     "inquirer": "8.2.5",
     "puppeteer": "^20.7.1"
   },
