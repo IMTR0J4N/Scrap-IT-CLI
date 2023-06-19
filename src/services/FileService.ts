@@ -1,11 +1,19 @@
 import * as fs from 'fs';
 
 export default class FileService {
-    public static async isFolderExist(path: string) {
+    public static async checkPathOrCreate(path: string) {
         if (fs.existsSync(path)) {
             return
         } else {
             this.createDir(path)
+        }
+    }
+
+    public static async checkIfPathExist(path: string) {
+        if (fs.existsSync(path)) {
+            return true
+        } else {
+            return false
         }
     }
 
