@@ -1,7 +1,9 @@
 import axios from 'axios';
+import * as HTMLParser from 'node-html-parser'
 import prettify = require('html-prettify');
 import FileService from './FileService';
 import { HTMLScrapOpt } from '../types';
+import { log } from 'console';
 
 export default class ScrapService {
 
@@ -10,7 +12,15 @@ export default class ScrapService {
         const folder = url.split('/')[2].split('.')[0]
 
         if (opt?.includeScript && opt?.includeStyle) {
-            FileService.setupTemplate(savePath, { template: "html-css-js"}, folder)
+            FileService.setupTemplate(savePath, { template: "html-css-js" }, folder)
+            
+            const scrapDocument = await this.getHtml(url)
+            
+            const scrapJsFiles = scrapDocument.querySelectorAll("script")
+
+            const scrapJs = await this.getJs(scrapJsFiles)
+
+            await FileService.writeDataInFile(`${savePath}\\Scrap-IT\\${folder}\\index.html`, scrapDocument.outerHTML)
         } else if (opt?.includeScript && !opt?.includeStyle) {
             FileService.setupTemplate(savePath, { template: 'html-js' }, folder)
         } else if (opt?.includeStyle && !opt?.includeScript) {
@@ -18,21 +28,20 @@ export default class ScrapService {
         } else if (!opt?.includeScript && !opt?.includeStyle) {
             FileService.setupTemplate(savePath, { template: 'html'}, folder)
         }
-
-        this.getHtml(url, savePath, folder)
-        
     }
 
-    private async getHtml(url: string, savePath: string, folder: string) {
-        const axiosRes = await axios.get(url, { responseType: "document" })
-       await FileService.writeDataInFile(`${savePath}\\Scrap-IT\\${folder}\\index.html`, axiosRes.data)
+    private async getHtml(url: string): Promise<HTMLParser.HTMLElement> {
+        const axiosRes = HTMLParser.parse((await axios.get(url, { responseType: "document" })).data)
+
+        return axiosRes
     }
 
-    private async getJs(url: string, savePath: string, folder: string) {
-       
+    private async getJs(jsFiles: HTMLParser.HTMLElement[]) {
+        for (const js of jsFiles) {
+       }
     }
 
-    private async getCss(url: string, savePath: string, folder: string) {
+    private async getCss(url: string) {
     
     }
 

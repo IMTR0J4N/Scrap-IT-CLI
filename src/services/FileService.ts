@@ -1,29 +1,27 @@
-import { existsSync, writeFileSync, mkdirSync, copyFileSync, renameSync } from 'fs';
+import { existsSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync } from 'fs';
 import { TemplateSetOpt } from '../types';
 import { ux } from '@oclif/core';
+import { log } from 'console';
+import path = require('path');
 
 export default class FileService {
     public static async setupTemplate(path: string, templates: TemplateSetOpt, folder: string) {
         switch (templates.template) {
             case 'html':
-                this.move(`../templates/html`, path)
-                renameSync(`${path}\\html`, `${path}\\${folder}`)
+                this.move(`${process.cwd()}/src/templates/html/`, path)
                 break;
             case 'html-css':
-                this.move(`../templates/html-css`, path)
-                renameSync(`${path}\\html-css`, `${path}\\${folder}`)
+                this.move(`../templates/html-css/`, path)
                 break;
             case 'html-js':
-                this.move(`../templates/html-js`, path)
-                renameSync(`${path}\\html-js`, `${path}\\${folder}`)
+                this.move(`../templates/html-js/`, path)
                 break;
             case 'html-css-js':
-                this.move(`../templates/html-css-js`, path)
-                renameSync(`${path}\\html-css-js`, `${path}\\${folder}`)
+                log(path)
+                this.move(`${process.cwd()}/src/templates/html-css-js/`, path)
                 break;
             default:
-                this.move(`../templates/html-css-js`, path)
-                renameSync(`${path}\\html-css-js`, `${path}\\${folder}`)
+                this.move(`../templates/html-css-js/`, path)
         }
     }
 
@@ -47,11 +45,21 @@ export default class FileService {
         }
     }
 
-    private static async move(path: string, destination: string) {
-        if (!existsSync(path) || !existsSync(destination)) {
-            ux.error('Invalid Path')
+    private static async move(srcPath: string, destination: string) {
+        mkdirSync(destination, { recursive: true })
+        for (const file of readdirSync(srcPath)) {
+            const srcFile = path.resolve(srcPath, file)
+            const destFile = path.resolve(destination, file)
+            this.copy(srcFile, destFile)
+        }
+    }
+
+    private static async copy(src: string, dest: string) {
+        const stat = statSync(src)
+        if (stat.isDirectory()) {
+            this.move(src, dest)
         } else {
-            copyFileSync(path, destination)
+            copyFileSync(src, dest)
         }
     }
 }
