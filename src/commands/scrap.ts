@@ -1,14 +1,16 @@
 import { Args, Command, Flags, ux } from '@oclif/core';
 import * as inquirer from 'inquirer';
+
 import { homedir, tmpdir } from 'os';
+
 import FileService from '../services/FileService';
-import PuppeteerService from '../services/PuppeteerService';
-import { URL } from 'url';
+import ScrapService from '../services/ScrapService';
+
 const userPath = homedir()
 
-const userDocuments = `${userPath}\\Documents`;
-const userDownloads = `${userPath}\\Downloads`;
-const userTmpFile = `${tmpdir()}`;
+const userDocuments = `${userPath}\\Documents\\Scrap-IT`;
+const userDownloads = `${userPath}\\Downloads\\Scrap-IT`;
+const userTmpFile = `${tmpdir()}\\Scrap-IT`;
 
 export default class Scrap extends Command {
   static description = 'describe the command here'
@@ -96,11 +98,11 @@ export default class Scrap extends Command {
                 type: 'input',
                 message: "Enter the custom path you want"
               }]).then(async res => {
-                await FileService.checkIfPathExist(res.customPath) ? new PuppeteerService().scrap(args.url, res.customPath, 'html', { includeScript: flags.js, includeStyle: flags.css }) : ux.error('Given path not exists')
+                await FileService.checkIfPathExist(res.customPath) ? new ScrapService().scrapURL(args.url, `${res.customPath}\\Scrap-IT`, 'html', { includeScript: flags.js, includeStyle: flags.css }) : ux.error('Given path not exists')
                 new inquirer.ui.BottomBar().updateBottomBar('Scraping');
               })
             } else {
-              new PuppeteerService().scrap(args.url, res.path, 'html', { includeScript: flags.js, includeStyle: flags.css})
+              new ScrapService().scrapURL(args.url, res.path, 'html', { includeScript: flags.js, includeStyle: flags.css})
             }
           })
 
