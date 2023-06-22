@@ -18,9 +18,9 @@ export default class ScrapService {
             
             const scrapJsFiles = scrapDocument.querySelectorAll("script")
 
-            const scrapJs = await this.getJs(scrapJsFiles)
+            const scrapJs = await this.getJs(scrapJsFiles, url)
 
-            await FileService.writeDataInFile(`${savePath}\\Scrap-IT\\${folder}\\index.html`, scrapDocument.outerHTML)
+            await FileService.writeDataInFile(`${savePath}${folder}\\index.html`, scrapDocument.outerHTML)
         } else if (opt?.includeScript && !opt?.includeStyle) {
             FileService.setupTemplate(savePath, { template: 'html-js' }, folder)
         } else if (opt?.includeStyle && !opt?.includeScript) {
@@ -36,9 +36,25 @@ export default class ScrapService {
         return axiosRes
     }
 
-    private async getJs(jsFiles: HTMLParser.HTMLElement[]) {
+    private async getJs(jsFiles: HTMLParser.HTMLElement[], url: string) {
         for (const js of jsFiles) {
-       }
+
+            let jsSrc = js.getAttribute('src');
+
+            if (jsSrc && await this.isUrl(jsSrc)) {
+                const axiosRes = (await axios.get(jsSrc)).data
+
+                return axiosRes
+            } else if (js.innerText !== "") {
+                return js.innerText
+            } else if (jsSrc && !await this.isUrl(jsSrc) && js.innerText === "") {
+                jsSrc = `${url}${jsSrc}`
+
+                const axiosRes = (await axios.get(jsSrc)).data
+
+                return axiosRes
+            }
+        }
     }
 
     private async getCss(url: string) {

@@ -9,9 +9,9 @@ import { existsSync, mkdirSync } from 'fs';
 
 const userPath = homedir()
 
-const userDocuments = `${userPath}\\Documents`;
-const userDownloads = `${userPath}\\Downloads`;
-const userTmpFile = `${tmpdir()}`;
+const userDocuments = `${userPath}\\Documents\\Scrap-IT\\`;
+const userDownloads = `${userPath}\\Downloads\\Scrap-IT\\`;
+const userTmpFile = `${tmpdir()}\\Scrap-IT\\`;
 
 export default class Scrap extends Command {
   static description = 'describe the command here'
@@ -103,8 +103,8 @@ export default class Scrap extends Command {
                 new inquirer.ui.BottomBar().updateBottomBar('Scraping');
               })
             } else {
-              if (!existsSync(`${res.path}\\Scrap-IT`)) {
-                mkdirSync(`${res.path}\\Scrap-IT`)
+              if (!existsSync(`${res.path}`)) {
+                mkdirSync(`${res.path}`)
               }
               new ScrapService().scrapURL(args.url, res.path, 'html', { includeScript: flags.js, includeStyle: flags.css})
             }

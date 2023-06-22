@@ -8,20 +8,23 @@ export default class FileService {
     public static async setupTemplate(path: string, templates: TemplateSetOpt, folder: string) {
         switch (templates.template) {
             case 'html':
-                this.move(`${process.cwd()}/src/templates/html/`, path)
+                this.createDir(`${path}${folder}`)
+                this.move(`${process.cwd()}/src/templates/html/`, `${path}${folder}`)
                 break;
             case 'html-css':
-                this.move(`../templates/html-css/`, path)
+                this.createDir(`${path}${folder}`)
+                this.move(`../templates/html-css/`, `${path}${folder}`)
                 break;
             case 'html-js':
-                this.move(`../templates/html-js/`, path)
+                this.createDir(`${path}${folder}`)
+                this.move(`../templates/html-js/`, `${path}${folder}`)
                 break;
             case 'html-css-js':
-                log(path)
-                this.move(`${process.cwd()}/src/templates/html-css-js/`, path)
+                this.createDir(`${path}${folder}`)
+                this.move(`${process.cwd()}/src/templates/html-css-js/`, `${path}${folder}`)
                 break;
             default:
-                this.move(`../templates/html-css-js/`, path)
+                this.move(`../templates/html-css-js/`, `${path}${folder}`)
         }
     }
 
