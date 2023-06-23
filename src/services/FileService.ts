@@ -1,4 +1,4 @@
-import { existsSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync } from 'fs';
+import { existsSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, appendFileSync } from 'fs';
 import { TemplateSetOpt } from '../types';
 import { ux } from '@oclif/core';
 import { log } from 'console';
@@ -13,18 +13,18 @@ export default class FileService {
                 break;
             case 'html-css':
                 this.createDir(`${path}${folder}`)
-                this.move(`../templates/html-css/`, `${path}${folder}`)
+                this.move(`${process.cwd()}/src/templates/html-css/`, `${path}${folder}`)
                 break;
             case 'html-js':
                 this.createDir(`${path}${folder}`)
-                this.move(`../templates/html-js/`, `${path}${folder}`)
+                this.move(`${process.cwd()}/src/templates/html-js/`, `${path}${folder}`)
                 break;
             case 'html-css-js':
                 this.createDir(`${path}${folder}`)
                 this.move(`${process.cwd()}/src/templates/html-css-js/`, `${path}${folder}`)
                 break;
             default:
-                this.move(`../templates/html-css-js/`, `${path}${folder}`)
+                this.move(`${process.cwd()}/src/templates/html-css-js/`, `${path}${folder}`)
         }
     }
 
@@ -38,6 +38,10 @@ export default class FileService {
 
     public static async writeDataInFile(filePath: string, data: string) {
         writeFileSync(filePath, data)
+    }
+
+    public static async appendDataInFile(filePath: string, data: string) {
+        appendFileSync(filePath, data)
     }
 
     private static async createDir(path: string) {
