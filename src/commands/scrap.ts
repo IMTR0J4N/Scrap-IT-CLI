@@ -106,7 +106,10 @@ export default class Scrap extends Command {
               if (!existsSync(`${res.path}`)) {
                 mkdirSync(`${res.path}`)
               }
-              new ScrapService().scrapURL(args.url, res.path, 'html', { includeScript: flags.js, includeStyle: flags.css})
+              ux.action.start('Scraping')
+              const scrap =  await new ScrapService().scrapURL(args.url, res.path, 'html', { includeScript: flags.js, includeStyle: flags.css})
+              ux.action.stop(`Successfully Scraped WebSite\nSaved To : ${scrap}`)
+
             }
           })
 

@@ -56,6 +56,8 @@ export default class ScrapService {
             
             const scrapDocument = await this.scrapAndWriteHtml(url, savePath, folder)
         }
+
+        return `${savePath}${folder}`
     }
 
     private async scrapAndWriteHtml(url: string, savePath: string, folder: string): Promise<HTMLParser.HTMLElement> {
