@@ -1,15 +1,16 @@
 {
-  "name": "scrape-it-cli",
-  "version": "0.0.0",
+  "name": "scrap-it-cli",
+  "version": "1.0",
   "description": "Advanced scraping CLI",
   "author": "IMTR0J4NV2",
+  "type": "commonjs",
   "bin": {
     "scrapeit": "./bin/run"
   },
-  "homepage": "https://github.com/IMTR0J4NV2/scrape-it-CLI",
+  "homepage": "https://github.com/IMTR0J4NV2/Scrap-IT-CLI",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "IMTR0J4NV2/scrape-it-CLI",
+  "repository": "IMTR0J4NV2/Scrap-IT-CLI",
   "files": [
     "/bin",
     "/dist",
@@ -20,7 +21,12 @@
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.4.7",
-    "inquirer": "8.2.5"
+    "@types/axios": "^0.14.0",
+    "axios": "^1.4.0",
+    "html-prettify": "^1.0.7",
+    "inquirer": "8.2.5",
+    "node-html-parser": "^6.1.5",
+    "os": "^0.1.2"
   },
   "devDependencies": {
     "@oclif/test": "^2.3.22",
