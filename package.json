@@ -55,8 +55,8 @@
     ],
     "topicSeparator": " ",
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
+      "scrap": {
+        "description": "Scrap a given url with some given options"
       }
     }
   },
@@ -74,6 +74,9 @@
   },
   "bugs": "https://github.com/IMTR0J4NV2/Scrap-IT-CLI/issues",
   "keywords": [
+    "scraper",
+    "cli",
+    "scrap",
     "oclif"
   ],
   "types": "dist/index.d.ts"
