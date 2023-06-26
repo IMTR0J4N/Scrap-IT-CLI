@@ -1,14 +1,7 @@
 {
+  // This file is not used in compilation. It is here just for a nice editor experience.
+  "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "importHelpers": true,
-    "module": "commonjs",
-    "outDir": "dist",
-    "rootDir": "src",
-    "strict": true,
-    "target": "es2019"
-  },
-  "include": [
-    "src/**/*"
-  ]
+    "baseUrl": "."
+  }
 }
