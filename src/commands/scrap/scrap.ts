@@ -3,8 +3,8 @@ import * as inquirer from 'inquirer';
 
 import { homedir, tmpdir } from 'os';
 
-import FileService from '../services/FileService';
-import ScrapService from '../services/ScrapService';
+import FileService from '../../services/FileService';
+import ScrapService from '../../services/ScrapService';
 import { existsSync, mkdirSync } from 'fs';
 
 const userPath = homedir()
@@ -14,7 +14,7 @@ const userDownloads = `${userPath}\\Downloads\\Scrap-IT\\`;
 const userTmpFile = `${tmpdir()}\\Scrap-IT\\`;
 
 export default class Scrap extends Command {
-  static description = 'describe the command here'
+  static description = 'Scrap given url with some cli\'s gived options'
 
   static examples = [
     '<%= config.bin %> <%= command.id %>',
