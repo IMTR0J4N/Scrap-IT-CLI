@@ -1,6 +1,6 @@
 {
   "name": "scrap-it-cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Advanced scraping CLI",
   "author": "IMTR0J4NV2",
   "type": "commonjs",
@@ -51,7 +51,12 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
-    ]
+    ],
+  "topics": {
+    "scrap": {
+      "description": "scrap a website"
+    }
+  }
   },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
