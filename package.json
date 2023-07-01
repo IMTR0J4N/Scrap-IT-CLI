@@ -28,7 +28,7 @@
     "os": "^0.1.2"
   },
   "devDependencies": {
-    "@oclif/test": "^2.3.22",
+    "@oclif/test": "^2.3.25",
     "@types/chai": "^4",
     "@types/inquirer": "8.2.5",
     "@types/mocha": "^9.0.0",
