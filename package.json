@@ -23,7 +23,7 @@
     "@oclif/plugin-plugins": "^2.4.7",
     "axios": "^1.4.0",
     "html-prettify": "^1.0.7",
-    "inquirer": "8.2.5",
+    "inquirer": "8.2.6",
     "node-html-parser": "^6.1.5",
     "os": "^0.1.2"
   },
